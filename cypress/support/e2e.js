@@ -7,6 +7,6 @@
 //import './commands'
 
 // Alternatively you can use CommonJS syntax:
-//require('./commands')
+require('./commands.js')
 
 Cypress.on('uncaught:exception', (_err, _runnable) => false);

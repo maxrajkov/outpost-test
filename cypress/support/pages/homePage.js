@@ -1,9 +1,9 @@
-import Commands from "../commands";
+import Commands from "../../support/commands";
 
 export default class Home extends Commands {
     constructor() {
         super();
-        this.loginPageUrl = '/home-page';
+        this.homePageUrl = '/home-page';
         this.profilePicture = '.notifications:last-child';
         this.signOutButton = '[class = "dropdown-content option"]:last-child'
 
@@ -14,16 +14,16 @@ export default class Home extends Commands {
    * Navigates to login page
    * @returns {void} void
    */
-  navigateToLoginPage() {
-    cy.visit(this.loginPageUrl);
+  navigateToHomePage() {
+    cy.visit(this.homePageUrl);
   }
 
   /**
    * Successful log-in
    * @returns {void}
    */
-  successfulLogIn() {
-    cy.url(eq.loginPageUrl)
+  successfulLogIn(value) {
+    this.verifyUrl(value)
   }
 
 

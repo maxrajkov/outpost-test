@@ -1,55 +1,70 @@
 /// <reference types="cypress" />
 
-import LogIn from "../../support/core/pages/LogIn";
-import  USERS  from "../../support/core/credentials/index";
-import Home from "../../support/core/pages/homePage";
-//import { longStackTraces } from "cypress/types/bluebird";
+import PageLogIn from "../../support/pages/logInPage";
+import LogIn from "../../support/actions/logIn";
+import  { USERS }  from "../../support/credentials/index";
+import Home from "../../support/pages/homePage";
+import credentials from "../../fixtures/data/users/player";
 
 
-
-const login = new LogIn()
+const pageLogIn = new PageLogIn()
+const logIn = new LogIn()
 const home = new Home()
-const user = new USERS()
 
-describe ('Player user should successfuly Login to the outpost chess platform', () => {
 
-//     //setup executed before each test case
-//     beforeEach(() => {
-//         LogIn.navigateTotheLogInPage
+describe ('testing log-in page behaviour accordingly to the ', () => {
 
-//    })
+    //setup executed before each test case
+    beforeEach(() => {
+       
 
-//    // teardown executed after each test case
-//    afterEach(() => {
-//       Home.signOut
-//    })
+   })
 
-//    // teardown executed after test suite
-//    after(() => {
+   // teardown executed after each test case
+   afterEach(() => {
       
-//    })
+   })
+
+   // teardown executed after test suite
+   after(() => {
+    
+   })
 })
 
 context('check if the player user is able to logIn on to the platform with valid and invalid crededentials', () => {
+  
+   
 
-    it('successful Log-in', function () {
+   it('successful Log-in', function () {
+   
+      // Navigate and verify log-in page
+    pageLogIn.navigateToLoginPage();
+    pageLogIn.verifyInputSection();
 
-    // Navigate to the login page
-    login.navigateToLoginPage();
-    login.verifyLogInPage();
+      //log in with valid credentials 
+    logIn.enterValidEmail(credentials.email);
+    logIn.enterValidPassword(credentials.password);
+    logIn.clickOnSignInButton();
 
-    //log in with valid credentials 
-    login.outpostLogin(USERS.player);
-    home.successfulLogIn();
+      //Verify successful log in
+    home.successfulLogIn('/home-page')  
 
-    });
 
-    it('Log-in Fail', () => {
-        // Navigate to the login page
-        login.navigateToLoginPage();
-        login.emailField();
 
-    })
+   });
+
+   //  it('Log-in Fail', () => {
+   //  // Navigate to the login page
+   //  logIn.navigateToLoginPage();
+   //  logIn.emailField();
+   //  })
+
+    
+
+
+
+
+    
 
 
 })
