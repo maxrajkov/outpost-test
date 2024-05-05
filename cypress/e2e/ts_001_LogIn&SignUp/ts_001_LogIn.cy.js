@@ -4,7 +4,7 @@ import PageLogIn from "../../support/pages/logInPage";
 import LogIn from "../../support/actions/logIn";
 import  { USERS }  from "../../support/credentials/index";
 import Home from "../../support/pages/homePage";
-import credentials from "../../fixtures/data/users/player";
+import player_credentials from "../../fixtures/data/users/player";
 
 
 const pageLogIn = new PageLogIn()
@@ -29,7 +29,6 @@ describe ('testing log-in page behaviour accordingly to the ', () => {
    after(() => {
     
    })
-})
 
 context('check if the player user is able to logIn on to the platform with valid and invalid crededentials', () => {
   
@@ -42,8 +41,8 @@ context('check if the player user is able to logIn on to the platform with valid
     pageLogIn.verifyInputSection();
 
       //log in with valid credentials 
-    logIn.enterValidEmail(credentials.email);
-    logIn.enterValidPassword(credentials.password);
+    logIn.enterEmail(player_credentials.email);
+    logIn.enterPassword(player_credentials.password);
     logIn.clickOnSignInButton();
 
       //Verify successful log in
@@ -53,19 +52,46 @@ context('check if the player user is able to logIn on to the platform with valid
 
    });
 
-   //  it('Log-in Fail', () => {
-   //  // Navigate to the login page
-   //  logIn.navigateToLoginPage();
-   //  logIn.emailField();
-   //  })
+     it('Log-in Fail due to wrong email', () => {
+      // Navigate to the login page
+     pageLogIn.navigateToLoginPage();
+      //enter the wrong email 
+     logIn.enterEmail(player_credentials.worng_email);
+      //enter the valid password
+     logIn.enterPassword(player_credentials.password)
+      //click sign in 
+      logIn.clickOnSignInButton();
+      //verify an error "login failed"
+     pageLogIn.failedError();
 
+
+     })
+
+     it('log-in fail due to incorrect password', () => {
+      pageLogIn.navigateToLoginPage();
+      //enter the wrong email 
+     logIn.enterEmail(player_credentials.email);
+      //enter the valid password
+     logIn.enterPassword(player_credentials.wrong_pass)
+      //click sign in 
+      logIn.clickOnSignInButton();
+      //verify an error "login failed"
+     pageLogIn.failedError();
+
+     })
+
+     it('log-in fail due to skiping mandatory fields', () => {
+     //navigate to the log in page 
+      pageLogIn.navigateToLoginPage();
+      //click on the sign in button 
+      logIn.clickOnSignInButton();
+      //verify an error  "Enter Password"
+      pageLogIn.enterPassword();
+      
+     })
     
 
-
-
-
-    
-
+   })
 
 })
     

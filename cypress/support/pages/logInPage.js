@@ -27,7 +27,8 @@ export default class PageLogIn extends Commands {
         this.signUpBtn = '[div#policy  p#joingoogle]';
 
         //Error selectors:
-        this.loginFail = 'div#password-padd > p:nth-of-type(2)';
+        this.passwordError = '#password-padd > :nth-child(2)'
+        this.loginFail = '#password-padd > :nth-child(3)';
         
       } 
     }
@@ -56,6 +57,24 @@ export default class PageLogIn extends Commands {
    */
   verifyInputSection() {
     this.verifyVisibilityOfElement(this.logInInput);
+  }
+
+  /**
+   * verify login fail error 
+   * @param {string} selector
+   * @returns {void} void 
+   */
+  failedError() {
+    cy.get(this.loginFail).should('include.text','Login failed.');
+  }
+
+   /**
+   * verify login fail error 
+   * @param {string} selector
+   * @returns {void} void 
+   */
+  enterPassword () {
+    cy.get(this.passwordError).should('include.text','Enter Password');
   }
 
 

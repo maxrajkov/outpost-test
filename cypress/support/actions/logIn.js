@@ -36,7 +36,7 @@ export default class LogIn extends Commands {
    * @param {string} text
    * @return {void} void
    */
-  enterValidEmail(value) {
+  enterEmail(value) {
     this.populateTextElement(this.emailField, value);
   }
 
@@ -45,7 +45,7 @@ export default class LogIn extends Commands {
    *  @param {string} text
    * @return {void} void
    */
-  enterValidPassword(value) {
+  enterPassword(value) {
     this.populateTextElement(this.passwordField, value);
   }
 
